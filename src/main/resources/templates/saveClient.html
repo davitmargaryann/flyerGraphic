@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: #ff0000;
+        }
+    </style>
+
+    <script>
+        function validateForm() {
+            // Validating Fullname
+            var fullname = document.forms["myForm"]["fullName"].value;
+            if (fullname == "") {
+                alert("Fullname must be filled out");
+                return false;
+            }
+
+            // Validating Email
+            var email = document.forms["myForm"]["email"].value;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email == "" || !email.match(emailRegex)) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+
+            // Validating Website
+            var website = document.forms["myForm"]["website"].value;
+            var websiteRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+            if (website == "" || !website.match(websiteRegex)) {
+                alert("Please enter a valid website URL");
+                return false;
+            }
+
+            // Validating Text (License Number)
+            var licenseNumber = document.forms["myForm"]["licenseNumber"].value;
+            if (licenseNumber == "") {
+                alert("License Number must be filled out");
+                return false;
+            }
+
+            // Validating Image Uploads
+            var profilePic = document.forms["myForm"]["profilePic"].value;
+            var personalLogo = document.forms["myForm"]["personalLogo"].value;
+            var companyLogo = document.forms["myForm"]["companyLogo"].value;
+            if (profilePic == "" || personalLogo == "" || companyLogo == "") {
+                alert("Please upload all three images");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Create Client</h1>
+<form name="myForm" action="/client/save" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" required><br><br>
+
+    <label for="website">Website:</label>
+    <input type="url" id="website" name="website" required><br><br>
+
+    <label for="licenseNumber">License Number:</label>
+    <input type="text" id="licenseNumber" name="licenseNumber" required><br><br>
+
+    <label for="profilePic">Profile Picture:</label>
+    <input type="file" id="profilePic" name="profilePic" required><br><br>
+
+    <label for="personalLogo">Personal Logo:</label>
+    <input type="file" id="personalLogo" name="personalLogo" required><br><br>
+
+    <label for="companyLogo">Company Logo:</label>
+    <input type="file" id="companyLogo" name="companyLogo" required><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

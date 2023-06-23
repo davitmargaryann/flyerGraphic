@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Client</title>
+  <style>
+    /* Custom styles for edit client page */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      display: inline-block;
+      width: 150px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"] {
+      width: 300px;
+      padding: 5px;
+    }
+
+    .form-group textarea {
+      width: 300px;
+      height: 100px;
+      padding: 5px;
+    }
+
+    .form-group .button-container {
+      margin-top: 10px;
+    }
+
+    .form-group .button-container button {
+      padding: 8px 16px;
+      border-radius: 4px;
+      background-color: #4caf50;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .form-group .button-container button.cancel-button {
+      background-color: #808080;
+    }
+
+    .form-group .button-container label {
+      display: block;
+      margin-top: 10px;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Edit Client</h1>
+  <form action="/client/save" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${client.id}">
+    <div class="form-group">
+      <label for="fullName">Full Name:</label>
+      <input type="text" id="fullName" name="fullName" th:value="${client.fullName}">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" th:value="${client.email}">
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="text" id="phoneNumber" name="phoneNumber" th:value="${client.phoneNumber}">
+    </div>
+    <div class="form-group">
+      <label for="website">Website:</label>
+      <input type="text" id="website" name="website" th:value="${client.website}">
+    </div>
+    <div class="form-group">
+      <label for="licenseNumber">License Number:</label>
+      <input type="text" id="licenseNumber" name="licenseNumber" th:value="${client.licenseNumber}">
+    </div>
+    <div class="form-group">
+      <label>Profile Picture:</label>
+      <input type="file" name="profilePic" accept="image/*">
+      <label th:if="${client.profilePic}"><strong>Current Image:</strong>  <img th:if="${client.profilePic != null}" th:src="@{/attachments(name=${client.profilePic})}" style="max-width:40%"> </label>
+    </div>
+    <div class="form-group">
+      <label>Personal Logo:</label>
+      <input type="file" name="personalLogo" accept="image/*">
+      <label th:if="${client.personalLogo}"><strong>Current Image:</strong> <img th:if="${client.personalLogo != null}" th:src="@{/attachments(name=${client.personalLogo})}" style="max-width:40%"> </label>
+    </div>
+    <div class="form-group">
+      <label>Company Logo:</label>
+      <input type="file" name="companyLogo" accept="image/*">
+      <label th:if="${client.companyLogo}"><strong>Current Image:</strong>  <img th:if="${client.companyLogo != null}" th:src="@{/attachments(name=${client.companyLogo})}" style="max-width:40%"> </label>
+    </div>
+    <div class="form-group button-container">
+      <button type="submit">Save</button>
+      <button type="button" class="cancel-button" onclick="window.history.back()">Cancel</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>
