@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Details</title>
+    <link href="/assets/css/clientFolderCss/clientDetails.css" id="style-rtl" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+      <div class="container-edit-btn"><button class="edit-button"> <a th:href="@{'/client/edit/' + ${client.id}}">Edit Client</a></button></div>
+    <h1>Client Details</h1>
+    <div class="container-box">
+        <div class="container-box-picture">
+            <div class="client-details">
+                <label>Profile Picture:</label>
+                <img th:if="${client.profilePic != null}" th:src="@{/attachments(name=${client.profilePic})}" style="max-width:40%">
+            </div>
+        </div>
+        <div class="container-box-info">
+        <div class="client-details">
+            <label>Full Name:</label>
+            <span th:if="${client.fullName != null}" th:text="${client.fullName}"></span>
+        </div>
+        <div class="client-details">
+            <label>Email:</label>
+            <span th:if="${client.email != null}" th:text="${client.email}"></span>
+        </div>
+        <div class="client-details">
+            <label>Phone Number:</label>
+            <span th:if="${client.phoneNumber != null}" th:text="${client.phoneNumber}"></span>
+        </div>
+        <div class="client-details">
+           <label>Website:</label><br>
+            <a th:if="${client.website != null}" th:text="${client.website}"></a>
+        </div>
+        <div class="client-details">
+            <label>License Number:</label>
+            <span th:if="${client.licenseNumber != null}" th:text="${client.licenseNumber}"></span>
+        </div>
+    </div>
+    </div>
+    <div class="container-box-logos">
+        <div class="client-details logo">
+            <label>Personal Logo:</label>
+            <img th:if="${client.personalLogo != null}" th:src="@{/attachments(name=${client.personalLogo})}" style="max-width:40%">
+        </div>
+        <div class="client-details logo">
+            <label>Company Logo:</label>
+            <img th:if="${client.companyLogo != null}" th:src="@{/attachments(name=${client.companyLogo})}" style="max-width:40%">
+        </div>
+    </div>
+    <div class="back-button">
+        <a href="/static">Back to Clients</a>
+    </div>
+</div>
+</body>
+</html>

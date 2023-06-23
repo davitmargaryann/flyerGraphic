@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Client List</title>
+    <link href="/assets/css/clientFolderCss/allClients.css" id="style-rtl" rel="stylesheet">
+</head>
+<body>
+<h1>Client List</h1>
+<div class="search-form">
+    <form th:action="@{/client/search}" method="get">
+        <input type="text" name="name" th:value="${name}" required placeholder="Search by name">
+        <input type="submit" value="Search">
+    </form>
+</div>
+<button class="get-button" onclick="location.href='/client/save'">Create a New Client</button>
+<table>
+    <thead>
+    <tr>
+        <th>Full Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="client : ${clients}">
+        <td>
+            <a th:href="@{'/client/' + ${client.id}}">
+                <span th:text="${client.fullName}" class="fullName-link"></span>
+            </a>
+        </td>
+        <td class="actions">
+            <a th:href="@{'/client/edit/' + ${client.id}}">
+                <img height="16px" src="/assets/img/editing.png" width="16px">
+            </a>
+            <form th:action="@{'/client/delete/' + ${client.id}}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this user?')">Delete
+                </button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

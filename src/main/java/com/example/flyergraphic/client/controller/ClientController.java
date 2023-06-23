@@ -3,10 +3,10 @@ package com.example.flyergraphic.client.controller;
 import com.example.flyergraphic.client.service.ClientService;
 import com.example.flyergraphic.dto.SaveClientRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.apache.commons.io.IOUtils;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,30 +40,30 @@ public class ClientController {
     @GetMapping("/client/{id}")
     public String getClientDetails(@PathVariable String id,ModelMap modelMap){
         clientService.getClientDetails(modelMap,id);
-        return "clientDetails";
+        return "/clientFolderHtml/clientDetails";
     }
 
     @GetMapping("/client/save")
     public String saveClient(){
-        return "saveClient";
+        return "/clientFolderHtml/saveClient";
     }
 
     @GetMapping("/client/edit/{id}")
     public String editClient(@PathVariable String id,ModelMap modelMap){
         clientService.getClientDetails(modelMap,id);
-        return "editClient";
+        return "/clientFolderHtml/editClient";
     }
 
     @GetMapping("/")
     public String getAllClients(ModelMap modelMap){
         modelMap.addAttribute("clients",clientService.findAll());
-        return "allClients";
+        return "/clientFolderHtml/allClients";
     }
 
     @GetMapping("/client/search")
     public String searchClients(@RequestParam String name,ModelMap modelMap){
         modelMap.addAttribute("clients",clientService.findByNameContaining(name));
-        return "allClients";
+        return "/clientFolderHtml/allClients";
     }
 
     @PostMapping("/client/delete/{id}")
@@ -74,6 +74,6 @@ public class ClientController {
 
     @GetMapping("/flyer")
     public String flyer(){
-        return "flyer-creator-style8";
+        return "/flyerStyles/flyer-creator-style8";
     }
 }
